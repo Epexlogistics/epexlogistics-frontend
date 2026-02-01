@@ -1,0 +1,202 @@
+/* =========================
+   FOOTER BASE (FULL WIDTH)
+========================= */
+.footer {
+  background: #0f172a;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  width: 100%;
+}
+
+/* =========================
+   INNER CONTAINER (CONTENT WIDTH)
+========================= */
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+}
+
+/* =========================
+   FOOTER TOP GRID
+========================= */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #334155;
+  align-items: start;
+}
+
+/* =========================
+   FOOTER COLUMNS
+========================= */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footer-column h4 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.footer-column p {
+  margin: 6px 0;
+  line-height: 1.6;
+  color: #cbd5e1;
+  width: 100%;
+}
+
+/* =========================
+   LINKS
+========================= */
+.footer-column a {
+  display: block;
+  margin: 6px 0;
+  color: #cbd5e1;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.footer-column a:hover {
+  color: #ffd400;
+}
+
+/* =========================
+   SUPPORT ITEMS
+========================= */
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+}
+
+/* =========================
+   NEWSLETTER
+========================= */
+.footer-newsletter {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* =========================
+   FOOTER BOTTOM
+========================= */
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   SOCIAL LINKS
+========================= */
+.footer-socials {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* =========================
+   TRUST STRIP (FULL WIDTH)
+========================= */
+.footer-trust {
+  border-top: 1px solid #334155;
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+
+/* =========================
+   MOBILE FOOTER REFINEMENT
+========================= */
+@media (max-width: 768px) {
+  /* 2-column grid for mobile */
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* BRAND: full width + better readability */
+  .footer-column:first-child {
+    grid-column: 1 / -1; /* span both columns */
+  }
+
+  .footer-column:first-child p {
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* Headings slightly smaller */
+  .footer-column h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  /* Links & text tighter */
+  .footer-column a,
+  .footer-column p {
+    font-size: 13px;
+  }
+
+  /* Newsletter form stack nicely */
+  .footer-newsletter {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-newsletter input,
+  .footer-newsletter button {
+    width: 100%;
+  }
+}
+
+/* =========================
+   MOBILE: CENTER BRAND + CLEAN TEXT
+========================= */
+@media (max-width: 768px) {
+  /* Brand column full width */
+  .footer-column:first-child {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Brand heading centered */
+  .footer-column:first-child h4 {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  /* Brand description: readable & balanced */
+  .footer-column:first-child p {
+    font-size: 13px;
+    line-height: 1.75;
+    max-width: 520px;   /* 👈 prevents long lines */
+    margin: 0 auto 10px;
+  }
+}

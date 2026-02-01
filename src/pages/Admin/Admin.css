@@ -1,0 +1,392 @@
+/* =========================
+   ADMIN LAYOUT
+========================= */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7fb;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.admin-page {
+  width: 100%;
+}
+
+/* =========================
+   SIDEBAR (DESKTOP)
+========================= */
+.admin-sidebar {
+  width: 240px;
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 24px 18px;
+  flex-shrink: 0;
+}
+
+.admin-logo {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #ffd400;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-nav a {
+  text-decoration: none;
+  color: #cbd5e1;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.admin-nav a:hover {
+  background: rgba(255, 212, 0, 0.15);
+  color: #ffd400;
+}
+
+.admin-nav a.active {
+  background: #ffd400;
+  color: #000;
+  font-weight: 700;
+}
+
+/* =========================
+   CONTENT AREA
+========================= */
+.admin-content {
+  flex: 1;
+  padding: 28px;
+  overflow-x: hidden;
+}
+
+.admin-page h2 {
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+/* =========================
+   TABLES
+========================= */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #f8fafc;
+  font-size: 14px;
+  color: #334155;
+  text-align: left;
+}
+
+.admin-table tr:hover td {
+  background: #f9fafb;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+.admin-table button {
+  margin: 4px 6px 0 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: none;
+  background: #165587;
+  color: white;
+  cursor: pointer;
+}
+
+.admin-table button:hover {
+  background: #0f3f66;
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status.in-transit {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.status.customs-clearance {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.on-hold {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status.out-for-delivery {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.delivered {
+  background: #bbf7d0;
+  color: #065f46;
+}
+
+/* =========================
+   SHIPMENT FORM GRID
+========================= */
+.shipment-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.shipment-box {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+.shipment-box h4 {
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.shipment-box input,
+.shipment-box select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+.shipment-box input:focus,
+.shipment-box select:focus {
+  outline: none;
+  border-color: #165587;
+  box-shadow: 0 0 0 3px rgba(22, 85, 135, 0.15);
+}
+
+/* =========================
+   CREATE ORDER BUTTON
+========================= */
+.shipment-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.shipment-actions button {
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: #165587;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.shipment-actions button:hover {
+  background: #0f3f66;
+}
+
+/* =========================
+   HISTORY RENDER (JSX MATCH)
+========================= */
+.admin-history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-history > div {
+  padding: 12px;
+  border-left: 3px solid #ffd400;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.admin-history strong {
+  color: #165587;
+}
+
+.admin-history small {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* =========================
+   UPDATE PANEL (JSX MATCH)
+========================= */
+.admin-update {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-update select,
+.admin-update input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+.admin-update button {
+  padding: 10px 16px;
+  font-weight: 700;
+}
+
+/* =========================
+   SHIPMENTS TABLE LAYOUT
+========================= */
+.shipments-table {
+  table-layout: fixed;
+}
+
+.shipments-table td,
+.shipments-table th {
+  white-space: normal;
+  word-break: break-word;
+  font-size: 13px;
+}
+
+/* VAT column */
+.shipments-table td:nth-child(8) {
+  color: #92400e;
+  font-weight: 600;
+}
+
+/* TOTAL column */
+.shipments-table td:nth-child(9) {
+  font-weight: 800;
+  color: #065f46;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .admin-content {
+    padding: 16px;
+  }
+
+  .shipment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .admin-table tr {
+    display: block;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    background: #fff;
+  }
+
+  .admin-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+  }
+
+  .admin-update {
+    flex-direction: column;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .admin-content,
+  .admin-content * {
+    visibility: visible;
+  }
+
+  .admin-sidebar,
+  button {
+    display: none !important;
+  }
+
+  .admin-table {
+    border: 1px solid #000;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    border: 1px solid #000;
+    color: #000;
+    font-size: 12px;
+  }
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.shipment-row {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.shipment-subrow td {
+  background: #f8fafc;
+}

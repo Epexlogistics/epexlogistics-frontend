@@ -1,0 +1,195 @@
+/* ================= PAGE ================= */
+.claims-page {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ================= HERO ================= */
+.claims-hero {
+  position: relative;
+  padding: 120px 24px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.claims-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.88)),
+    url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.claims-hero h1,
+.claims-hero p {
+  position: relative;
+  z-index: 1;
+}
+
+.claims-hero h1 {
+  font-size: 46px;
+  margin-bottom: 16px;
+}
+
+.claims-hero p {
+  max-width: 760px;
+  margin: auto;
+  font-size: 18px;
+  color: #e5e7eb;
+}
+
+/* ================= CONTAINER ================= */
+.claims-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 90px 24px;
+}
+
+/* ================= SECTIONS ================= */
+.claims-section {
+  margin-bottom: 80px;
+}
+
+.claims-section h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: rgb(22, 85, 135);
+}
+
+.claims-section p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #334155;
+}
+
+/* ================= GRID ================= */
+.claims-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.claims-card {
+  background: #f8fafc;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+}
+
+.claims-card h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: rgb(22, 85, 135);
+}
+
+.claims-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.claims-card li {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #334155;
+}
+
+/* ================= CLAIM STEPS ================= */
+.claims-steps {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+  border-left: 3px solid #e5e7eb;
+}
+
+.claims-steps li {
+  padding-left: 22px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.claims-steps li::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: #ffd400;
+  border-radius: 50%;
+}
+
+.claims-steps strong {
+  display: block;
+  font-size: 18px;
+  color: rgb(22, 85, 135);
+  margin-bottom: 6px;
+}
+
+.claims-steps p {
+  margin: 0;
+  font-size: 16px;
+  color: #475569;
+}
+
+/* ================= HIGHLIGHT ================= */
+.claims-section.highlight {
+  background: #0f172a;
+  color: white;
+  padding: 70px;
+  border-radius: 18px;
+}
+
+.claims-section.highlight h2 {
+  color: #ffd400;
+}
+
+.claims-section.highlight p {
+  color: #e5e7eb;
+}
+
+/* ================= LIMITS ================= */
+.claims-limits {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.claims-limits li {
+  margin: 12px 0;
+  font-size: 16px;
+  color: #e5e7eb;
+}
+
+/* ================= DISCLAIMER ================= */
+.claims-disclaimer {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.claims-disclaimer p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .claims-hero h1 {
+    font-size: 34px;
+  }
+
+  .claims-section.highlight {
+    padding: 40px 24px;
+  }
+
+  .claims-section h2 {
+    font-size: 26px;
+  }
+}

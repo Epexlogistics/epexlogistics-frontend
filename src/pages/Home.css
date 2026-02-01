@@ -1,0 +1,625 @@
+/* ======================================================
+   GLOBAL SAFETY & RESET
+====================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+section {
+  width: 100%;
+}
+
+/* ======================================================
+   HERO SLIDER
+====================================================== */
+.hero-slider {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: 110%;               /* 👈 allow movement */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0f3c64;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* ======================================================
+   OVERLAY
+====================================================== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-overlay.blue { background: rgba(22, 85, 135, 0.78); }
+.hero-overlay.dark { background: rgba(20, 20, 20, 0.75); }
+.hero-overlay.gold { background: rgba(120, 90, 0, 0.55); }
+
+/* ======================================================
+   CONTENT
+====================================================== */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 200px 24px 0;
+  color: white;
+
+  /* ✅ visual shift only */
+  transform: translateX(10px);
+}
+
+
+.hero-content h1 {
+  font-size: 56px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  line-height: 1.15;
+}
+
+.hero-content p {
+  max-width: 680px;
+  font-size: 20px;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+.hero-buttons {
+  margin-top: 32px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ======================================================
+   REAL IMAGE MOTION (FIRST 3 SLIDES ONLY)
+====================================================== */
+
+/* 🚢 SHIP — slow horizontal ocean motion */
+.hero-slide.active[data-motion="ship"] {
+  animation: shipMotion 18s linear infinite;
+}
+
+/* ✈️ PLANE — diagonal takeoff motion */
+.hero-slide.active[data-motion="plane"] {
+  animation: planeMotion 14s ease-in-out infinite;
+}
+
+/* 📦 COURIER — subtle street parallax */
+.hero-slide.active[data-motion="courier"] {
+  animation: courierMotion 12s ease-in-out infinite;
+}
+
+/* ======================================================
+   KEYFRAMES (ACTUAL MOVEMENT)
+====================================================== */
+
+/* Ship: forward glide */
+@keyframes shipMotion {
+  from {
+    background-position: 40% 50%;
+    background-size: 110%;
+  }
+  to {
+    background-position: 60% 50%;
+    background-size: 118%;
+  }
+}
+
+/* Plane: climb + forward */
+@keyframes planeMotion {
+  from {
+    background-position: 30% 65%;
+    background-size: 110%;
+  }
+  to {
+    background-position: 70% 20%;
+    background-size: 122%;
+  }
+}
+
+/* Courier: walking illusion */
+@keyframes courierMotion {
+  from {
+    background-position: 50% 50%;
+    background-size: 110%;
+  }
+  to {
+    background-position: 46% 50%;
+    background-size: 116%;
+  }
+}
+
+/* ======================================================
+   MOBILE
+====================================================== */
+@media (max-width: 768px) {
+  .hero-content {
+    padding-top: 160px;
+  }
+
+  .hero-content h1 {
+    font-size: 38px;
+  }
+}
+
+
+/* 📦 COURIER — ADJUST FRAMING SO FACE SHOWS */
+.hero-slide[data-motion="courier"] {
+  background-size: 100% !important;      /* reduce zoom */
+  background-position: center top !important; /* move image up */
+}
+
+
+
+
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+.btn {
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn.primary {
+  background: #ffd400;
+  color: #000;
+}
+
+.btn.primary:hover {
+  background: #f5c800;
+}
+
+.btn.outline {
+  border: 2px solid white;
+  color: white;
+}
+
+.btn.outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ======================================================
+   SHARED SECTION SPACING (DESKTOP)
+====================================================== */
+.services,
+.industries,
+.image-text-grid,
+.why-us,
+.capabilities-grid,
+.process-grid,
+.global-stats,
+.world-map,
+.services-rich,
+.services-expanded {
+  padding: 100px 24px;
+}
+
+/* ======================================================
+   SERVICES
+====================================================== */
+.services {
+  background: #f8f9fb;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 2.4rem;
+  color: rgb(22, 85, 135);
+}
+
+.services-sub {
+  color: #666;
+  margin-bottom: 50px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+  
+}
+
+.service-card h3{
+  color: rgb(22, 85, 135);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ======================================================
+   IMAGE TEXT GRID
+====================================================== */
+.image-text-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: center;
+}
+
+.image-text-row.reverse {
+  direction: rtl;
+}
+
+.image-text-row.reverse .text {
+  direction: ltr;
+}
+
+.image-text-row img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* ======================================================
+   INDUSTRIES
+====================================================== */
+.industries {
+  background: white;
+  text-align: center;
+}
+
+.industries h2 {
+  font-size: 2.4rem;
+  color: rgb(22, 85, 135);
+}
+
+.industries-sub {
+  margin-bottom: 50px;
+  color: #666;
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.industry-card {
+  background: #f8f9fb;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-6px);
+}
+
+.industry-card h3 {
+  color: rgb(22, 85, 135);
+}
+
+/* ======================================================
+   WHY US
+====================================================== */
+.why-us {
+  background: #f4f7fb;
+  text-align: center;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+
+.why-grid h3{
+  color: rgb(22, 85, 135);
+}
+
+/* ======================================================
+   CAPABILITIES
+====================================================== */
+.capabilities-grid {
+  text-align: center;
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.cap-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cap-card h3{
+  color: rgb(22, 85, 135);
+}
+
+.cap-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* ======================================================
+   PROCESS
+====================================================== */
+.process-grid {
+  text-align: center;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.process-steps h4{
+  color: rgb(22, 85, 135);
+}
+
+.process-steps span {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffd400;
+}
+
+/* ======================================================
+   GLOBAL STATS
+====================================================== */
+.global-stats {
+  background: #f4f7fb;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.stats-text h2 {
+  font-size: 36px;
+  color: rgb(22, 85, 135);
+}
+
+.globe {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png");
+  background-size: cover;
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ======================================================
+   GLOBAL STATS — MOBILE OPTIMIZATION
+====================================================== */
+@media (max-width: 768px) {
+  .global-stats {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .stats-text h2 {
+    font-size: 22px;
+    line-height: 1.3;
+    max-width: 100%;
+    margin: 0 auto 16px;
+
+    /* 🔑 Prevent ugly word breaking */
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+
+    /* ✨ Modern text balancing */
+    text-wrap: balance;
+  }
+
+  .stats-text ul {
+    padding-left: 0;
+    list-style-position: inside;
+    text-align: left;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .globe {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+}
+
+
+
+/* ======================================================
+   WORLD MAP
+====================================================== */
+.world-map {
+  background: #f4f7fb;
+  text-align: center;
+}
+
+.map-container {
+  position: relative;
+}
+
+.map-container img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+}
+
+.map-routes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-routes path {
+  fill: none;
+  stroke: #ffd400;
+  stroke-width: 3;
+  stroke-dasharray: 8 10;
+  animation: moveRoute 3.5s linear infinite;
+}
+
+@keyframes moveRoute {
+  to { stroke-dashoffset: -120; }
+}
+
+/* ======================================================
+   SERVICES RICH & EXPANDED
+====================================================== */
+
+.services-rich .services-grid .service h4 {
+  color: #165587;
+}
+
+
+
+
+.services-rich,
+.services-expanded {
+  text-align: center;
+  
+}
+
+.services-expanded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.service-box,
+.service-rich-card {
+  background: #f8f9fb;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.services-expanded-grid h3 {
+  color: #165587;
+}
+
+/* ======================================================
+   FLOATING TRACKER
+====================================================== */
+.floating-tracker {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999;
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.floating-tracker input {
+  flex: 1;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.floating-tracker button {
+  background: #165587;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+}
+
+/* ======================================================
+   MOBILE – TRUE FULL WIDTH
+====================================================== */
+@media (max-width: 768px) {
+
+  .hero-content {
+    padding: 140px 16px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .image-text-row {
+    grid-template-columns: 1fr;
+  }
+
+  .services,
+  .industries,
+  .image-text-grid,
+  .why-us,
+  .capabilities-grid,
+  .process-grid,
+  .global-stats,
+  .world-map,
+  .services-rich,
+  .services-expanded {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .floating-tracker {
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+  }
+}
+
+
