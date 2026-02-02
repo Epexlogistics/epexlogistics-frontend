@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import api from "../api/axios";
 import html2pdf from "html2pdf.js"; 
-import logo from "../assets/logo.png"; 
+import logo from "../assets/logo.png";
+import epexStamp from "../assets/epex-stamp.png";
 import "./Track.css";
 
 import {
@@ -133,7 +134,7 @@ export default function Track() {
           </style>
         </head>
         <body>
-          <div class="watermark">PAID</div>
+          
           ${printRef.current.innerHTML}
         </body>
       </html>
@@ -178,10 +179,11 @@ export default function Track() {
         {/* ================= MAP ================= */}
         <div className="map-card">
           <MapContainer
-            center={coords.length > 0 ? coords[movingIndex] : [9.082, 8.6753]}
-            zoom={coords.length > 0 ? 5 : 4}
-            style={{ height: "420px", width: "100%" }}
-          >
+  center={coords.length > 0 ? coords[movingIndex] : [54.5260, 15.2551]}
+  zoom={coords.length > 0 ? 5 : 4}
+  style={{ height: "420px", width: "100%" }}
+>
+
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
             {coords.length > 1 && (
@@ -204,76 +206,164 @@ export default function Track() {
           </MapContainer>
         </div>
 
-        {/* ================= INVOICE ================= */}
-        {invoice && (
-          <>
-            <div className="card">
-              <button onClick={printInvoice}>🖨️ Print Invoice</button>
-              <button onClick={downloadPDF}>⬇️ Download PDF</button>
-            </div>
+{/* ================= INVOICE ================= */}
+{invoice && (
+  <>
+    <div className="card">
+      <button onClick={printInvoice}>🖨️ Print Invoice</button>
+      <button onClick={downloadPDF}>⬇️ Download PDF</button>
+    </div>
 
-            <div ref={printRef}>
-              {/* ✅ LOGO ADDED */}
+    {/* 👇 IMPORTANT: invoice-wrapper added */}
+    <div
+      ref={printRef}
+      className="invoice-wrapper"
+      style={{ position: "relative" }}
+    >
+      {/* ===== REAL STAMP (BETWEEN VAT & TOTAL, LOWER) ===== */}
+      <div
+        style={{
+          position: "absolute",
+          top: "380px",
+          left: "48%",
+          transform: "translateX(-50%) rotate(-25deg)",
+          width: "180px",
+          height: "180px",
+          zIndex: 20,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={epexStamp}
+          alt="Epex Logistics Stamp"
+          style={{ width: "100%", height: "100%", opacity: 0.85 }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#0a7a2f",
+            fontWeight: "bold",
+            mixBlendMode: "multiply",
+          }}
+        >
+          <div style={{ fontSize: 30, letterSpacing: 2 }}>PAID</div>
+          <div style={{ fontSize: 13, marginTop: 6 }}>
+            {new Date(invoice.invoice.issuedAt).toLocaleDateString()}
+          </div>
+        </div>
+      </div>
+
+      {/* LOGO */}
+      <table>
+        <tbody>
+          <tr>
+            <td>
               <img src={logo} alt="Company Logo" style={{ height: 60 }} />
+            </td>
+            <td style={{ textAlign: "right" }}>
+              <strong>Epex Logistics</strong>
+              <br />
+              Global Shipping & Delivery
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-              <h2>Epex Logistics</h2>
-              <p>International Courier Services</p>
+      {/* INVOICE META */}
+      <table>
+        <tbody>
+          <tr>
+            <th>Invoice Number</th>
+            <td>{invoice.invoice.invoiceNumber}</td>
+            <th>Date</th>
+            <td>{new Date(invoice.invoice.issuedAt).toLocaleDateString()}</td>
+          </tr>
+        </tbody>
+      </table>
 
-              <p><strong>Invoice:</strong> {invoice.invoice.invoiceNumber}</p>
-              <p><strong>Date:</strong> {new Date(invoice.invoice.issuedAt).toLocaleDateString()}</p>
-              <p><strong>Status:</strong> PAID</p>
+      {/* SENDER & RECEIVER */}
+      <table>
+        <thead>
+          <tr>
+            <th colSpan="2">Sender</th>
+            <th colSpan="2">Receiver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>{invoice.sender.name}</td>
+            <td>Name</td>
+            <td>{invoice.receiver.name}</td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>{invoice.sender.phone}</td>
+            <td>Phone</td>
+            <td>{invoice.receiver.phone}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{invoice.sender.address}</td>
+            <td>Address</td>
+            <td>{invoice.receiver.address}</td>
+          </tr>
+        </tbody>
+      </table>
 
-              <hr />
+      {/* ================= TRACKING PAGE TABLE (WITH LINES) ================= */}
+      <table className="tracking-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Weight</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Courier Shipment</td>
+            <td>{invoice.shipment.quantity}</td>
+            <td>{invoice.shipment.weight} kg</td>
+            <td>
+              {invoice.payment.currency}
+              {invoice.payment.subtotal}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan="3">Subtotal</td>
+            <td>{invoice.payment.currency}{invoice.payment.subtotal}</td>
+          </tr>
+          <tr>
+            <td colSpan="3">VAT</td>
+            <td>{invoice.payment.currency}{invoice.payment.tax}</td>
+          </tr>
+          <tr className="totals">
+            <td colSpan="3"><strong>TOTAL</strong></td>
+            <td>
+              <strong>
+                {invoice.payment.currency}
+                {invoice.payment.total}
+              </strong>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </>
+)}
 
-              <h3>Sender</h3>
-              <p>{invoice.sender.name}</p>
-              <p>{invoice.sender.phone}</p>
-              <p>{invoice.sender.address}</p>
 
-              <h3>Receiver</h3>
-              <p>{invoice.receiver.name}</p>
-              <p>{invoice.receiver.phone}</p>
-              <p>{invoice.receiver.address}</p>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>Description</th>
-                    <th>Qty</th>
-                    <th>Weight</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Courier Shipment</td>
-                    <td>{invoice.shipment.quantity}</td>
-                    <td>{invoice.shipment.weight} kg</td>
-                    <td>
-                      {invoice.payment.currency}
-                      {invoice.payment.subtotal}
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  {/* ✅ TAX / VAT BREAKDOWN */}
-                  <tr>
-                    <td colSpan="3">Subtotal</td>
-                    <td>{invoice.payment.currency}{invoice.payment.subtotal}</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="3">VAT</td>
-                    <td>{invoice.payment.currency}{invoice.payment.tax}</td>
-                  </tr>
-                  <tr className="totals">
-                    <td colSpan="3">TOTAL</td>
-                    <td>{invoice.payment.currency}{invoice.payment.total}</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </>
-        )}
 
         {/* ================= HISTORY ================= */}
         {history.length > 0 && (
