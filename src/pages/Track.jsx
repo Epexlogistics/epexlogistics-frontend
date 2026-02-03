@@ -214,12 +214,31 @@ export default function Track() {
       <button onClick={downloadPDF}>⬇️ Download PDF</button>
     </div>
 
-    {/* 👇 IMPORTANT: invoice-wrapper added */}
     <div
       ref={printRef}
       className="invoice-wrapper"
       style={{ position: "relative" }}
     >
+      {/* ===== WATERMARK (BEHIND CONTENT) ===== */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%) rotate(-30deg)",
+          fontSize: "110px",
+          fontWeight: 800,
+          color: "rgba(0, 0, 0, 0.05)",
+          letterSpacing: "6px",
+          whiteSpace: "nowrap",
+          zIndex: 1,
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
+      >
+        EPEX LOGISTICS
+      </div>
+
       {/* ===== REAL STAMP (BETWEEN VAT & TOTAL, LOWER) ===== */}
       <div
         style={{
@@ -259,40 +278,60 @@ export default function Track() {
         </div>
       </div>
 
-      {/* LOGO */}
-      <table>
+      {/* LOGO + COMPANY INFO */}
+      <table style={{ position: "relative", zIndex: 2 }}>
         <tbody>
           <tr>
             <td>
               <img src={logo} alt="Company Logo" style={{ height: 60 }} />
             </td>
             <td style={{ textAlign: "right" }}>
-              <strong>Epex Logistics</strong>
+              <strong style={{ color: "rgb(22, 85, 135)" }}>
+                Epex Logistics
+              </strong>
               <br />
-              Global Shipping & Delivery
+              <span style={{ color: "rgb(22, 85, 135)" }}>
+                Global Shipping & Delivery
+              </span>
+              <br />
+              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
+                No: 8, 34862 Kartal, Istanbul, Turkey
+              </span>
+              <br />
+              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
+                support@epexlogistics.com
+              </span>
+              <br />
+              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
+                https://epexlogistics.com
+              </span>
             </td>
           </tr>
         </tbody>
       </table>
 
       {/* INVOICE META */}
-      <table>
+      <table style={{ position: "relative", zIndex: 2 }}>
         <tbody>
           <tr>
-            <th>Invoice Number</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Invoice Number</th>
             <td>{invoice.invoice.invoiceNumber}</td>
-            <th>Date</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Date</th>
             <td>{new Date(invoice.invoice.issuedAt).toLocaleDateString()}</td>
           </tr>
         </tbody>
       </table>
 
       {/* SENDER & RECEIVER */}
-      <table>
+      <table style={{ position: "relative", zIndex: 2 }}>
         <thead>
           <tr>
-            <th colSpan="2">Sender</th>
-            <th colSpan="2">Receiver</th>
+            <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
+              Sender
+            </th>
+            <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
+              Receiver
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -317,14 +356,14 @@ export default function Track() {
         </tbody>
       </table>
 
-      {/* ================= TRACKING PAGE TABLE (WITH LINES) ================= */}
-      <table className="tracking-table">
+      {/* SHIPMENT DETAILS */}
+      <table className="tracking-table" style={{ position: "relative", zIndex: 2 }}>
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Qty</th>
-            <th>Weight</th>
-            <th>Amount</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Description</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Qty</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Weight</th>
+            <th style={{ color: "rgb(22, 85, 135)" }}>Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -341,14 +380,22 @@ export default function Track() {
         <tfoot>
           <tr>
             <td colSpan="3">Subtotal</td>
-            <td>{invoice.payment.currency}{invoice.payment.subtotal}</td>
+            <td>
+              {invoice.payment.currency}
+              {invoice.payment.subtotal}
+            </td>
           </tr>
           <tr>
             <td colSpan="3">VAT</td>
-            <td>{invoice.payment.currency}{invoice.payment.tax}</td>
+            <td>
+              {invoice.payment.currency}
+              {invoice.payment.tax}
+            </td>
           </tr>
           <tr className="totals">
-            <td colSpan="3"><strong>TOTAL</strong></td>
+            <td colSpan="3">
+              <strong>TOTAL</strong>
+            </td>
             <td>
               <strong>
                 {invoice.payment.currency}
@@ -358,9 +405,31 @@ export default function Track() {
           </tr>
         </tfoot>
       </table>
+
+      {/* FOOTER DISCLAIMER */}
+      <div
+        style={{
+          marginTop: 50,
+          fontSize: 12,
+          color: "#475569",
+          lineHeight: 1.6,
+          textAlign: "center",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <strong>Disclaimer:</strong>
+        <br />
+        This invoice serves as proof of payment for logistics services rendered by
+        Epex Logistics. All shipments are handled in accordance with our standard
+        terms and conditions. Epex Logistics shall not be held liable for delays
+        caused by customs inspections, force majeure, or circumstances beyond our
+        control.
+      </div>
     </div>
   </>
 )}
+
 
 
 

@@ -70,7 +70,7 @@ export default function Contact() {
         <div className="contact-card">
           <h3>📍 Office</h3>
           <p style={{ marginLeft: "-210px" }}>Head Office</p>
-          <strong>Kartal, Istanbul, Turkey.</strong>
+          <strong>No:8 34862 Kartal, Istanbul, Turkey.</strong>
           <span>Worldwide operations</span>
         </div>
 
@@ -137,7 +137,7 @@ export default function Contact() {
       {/* ================= MAP SECTION ================= */}
       <div className="contact-map-section">
         <h2>Our Location</h2>
-        <p>Visit our head office in Kartal, Istanbul, Turkey.</p>
+        <p>Visit our head office in No: 8 Kartal, Istanbul, Turkey.</p>
 
         <div className="map-wrapper">
           <iframe
