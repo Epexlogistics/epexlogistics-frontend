@@ -219,8 +219,9 @@ export default function Track() {
       className="invoice-wrapper"
       style={{ position: "relative" }}
     >
-      {/* ===== WATERMARK (BEHIND CONTENT) ===== */}
+      {/* ===== WATERMARK ===== */}
       <div
+        className="invoice-watermark"
         style={{
           position: "absolute",
           top: "50%",
@@ -239,8 +240,9 @@ export default function Track() {
         EPEX LOGISTICS
       </div>
 
-      {/* ===== REAL STAMP (BETWEEN VAT & TOTAL, LOWER) ===== */}
+      {/* ===== STAMP ===== */}
       <div
+        className="invoice-stamp"
         style={{
           position: "absolute",
           top: "380px",
