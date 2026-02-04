@@ -14,6 +14,16 @@ import road from "../assets/couriers/road.jpg";
 import sea from "../assets/couriers/sea.jpg";
 import warehouse from "../assets/couriers/warehouse.jpg";
 
+
+<section className="sr-only">
+  <h1>Epex Logistics</h1>
+  <p>
+    Epex Logistics is a global logistics and shipping company providing fast,
+    secure, and reliable delivery services worldwide.
+  </p>
+</section>
+
+
 /* ================= SLIDER DATA ================= */
 const slides = [
   {
