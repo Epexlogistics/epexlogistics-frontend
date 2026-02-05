@@ -1,4 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.epexlogistics.com"
+        }
+      ],
+      "destination": "https://epexlogistics.com/$1",
+      "permanent": true
+    }
+  ],
   "routes": [
     {
       "src": "/assets/(.*)",
