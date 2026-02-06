@@ -20,6 +20,8 @@ import warehouse from "../assets/couriers/warehouse.jpg";
   <p>
     Epex Logistics is a global logistics and shipping company providing fast,
     secure, and reliable delivery services worldwide.
+    We are located at No:8 34862 Kartal, Istanbul, Turkey. 
+    Contact us with support@epexlogistics.com or admin@epexlogistics.com
   </p>
 </section>
 
