@@ -325,38 +325,49 @@ export default function Track() {
       </table>
 
       {/* SENDER & RECEIVER */}
-      <table style={{ position: "relative", zIndex: 2 }}>
-        <thead>
-          <tr>
-            <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
-              Sender
-            </th>
-            <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
-              Receiver
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Name</td>
-            <td>{invoice.sender.name}</td>
-            <td>Name</td>
-            <td>{invoice.receiver.name}</td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-            <td>{invoice.sender.phone}</td>
-            <td>Phone</td>
-            <td>{invoice.receiver.phone}</td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>{invoice.sender.address}</td>
-            <td>Address</td>
-            <td>{invoice.receiver.address}</td>
-          </tr>
-        </tbody>
-      </table>
+<table style={{ position: "relative", zIndex: 2 }}>
+  <thead>
+    <tr>
+      <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
+        Sender
+      </th>
+      <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
+        Receiver
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>{invoice.sender.name}</td>
+      <td>Name</td>
+      <td>{invoice.receiver.name}</td>
+    </tr>
+
+    {/* ✅ EMAIL ROW ADDED */}
+    <tr>
+      <td>Email</td>
+      <td>{invoice.sender.email || "—"}</td>
+      <td>Email</td>
+      <td>{invoice.receiver.email || "—"}</td>
+    </tr>
+
+    <tr>
+      <td>Phone</td>
+      <td>{invoice.sender.phone}</td>
+      <td>Phone</td>
+      <td>{invoice.receiver.phone}</td>
+    </tr>
+
+    <tr>
+      <td>Address</td>
+      <td>{invoice.sender.address}</td>
+      <td>Address</td>
+      <td>{invoice.receiver.address}</td>
+    </tr>
+  </tbody>
+</table>
+
 
       {/* SHIPMENT DETAILS */}
       <table className="tracking-table" style={{ position: "relative", zIndex: 2 }}>

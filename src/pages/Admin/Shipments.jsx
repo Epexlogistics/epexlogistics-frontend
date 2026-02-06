@@ -315,8 +315,14 @@ export default function Shipments() {
               <Fragment key={s._id}>
                 <tr className="shipment-row">
                   <td>{s.trackingNumber}</td>
-                  <td>{s.sender?.name}</td>
-                  <td>{s.receiver?.name}</td>
+                  <td>
+                    {s.sender?.name}<br />
+                   <small>{s.sender?.email || "—"}</small>
+                  </td>
+                  <td>
+                    {s.receiver?.name}<br />
+                    <small>{s.receiver?.email || "—"}</small>
+                  </td>
                   <td>{s.origin}</td>
                   <td>{s.destination}</td>
                   <td>{s.paymentMethod || "Cash"}</td>
