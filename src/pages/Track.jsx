@@ -214,14 +214,10 @@ export default function Track() {
       <button onClick={downloadPDF}>⬇️ Download PDF</button>
     </div>
 
-    <div
-      ref={printRef}
-      className="invoice-wrapper"
-      style={{ position: "relative" }}
-    >
+    <div ref={printRef} className="invoice-wrapper" style={{ position: "relative" }}>
+
       {/* ===== WATERMARK ===== */}
       <div
-        className="invoice-watermark"
         style={{
           position: "absolute",
           top: "50%",
@@ -229,12 +225,11 @@ export default function Track() {
           transform: "translate(-50%, -50%) rotate(-30deg)",
           fontSize: "110px",
           fontWeight: 800,
-          color: "rgba(0, 0, 0, 0.05)",
+          color: "rgba(0,0,0,0.05)",
           letterSpacing: "6px",
           whiteSpace: "nowrap",
           zIndex: 1,
           pointerEvents: "none",
-          userSelect: "none",
         }}
       >
         EPEX LOGISTICS
@@ -242,7 +237,6 @@ export default function Track() {
 
       {/* ===== STAMP ===== */}
       <div
-        className="invoice-stamp"
         style={{
           position: "absolute",
           top: "380px",
@@ -251,14 +245,9 @@ export default function Track() {
           width: "180px",
           height: "180px",
           zIndex: 20,
-          pointerEvents: "none",
         }}
       >
-        <img
-          src={epexStamp}
-          alt="Epex Logistics Stamp"
-          style={{ width: "100%", height: "100%", opacity: 0.85 }}
-        />
+        <img src={epexStamp} alt="Stamp" style={{ width: "100%", height: "100%", opacity: 0.85 }} />
 
         <div
           style={{
@@ -270,178 +259,140 @@ export default function Track() {
             justifyContent: "center",
             color: "#0a7a2f",
             fontWeight: "bold",
-            mixBlendMode: "multiply",
           }}
         >
-          <div style={{ fontSize: 30, letterSpacing: 2 }}>PAID</div>
-          <div style={{ fontSize: 13, marginTop: 6 }}>
-            {new Date(invoice.invoice.issuedAt).toLocaleDateString()}
+          <div style={{ fontSize: 30 }}>PAID</div>
+          <div style={{ fontSize: 13 }}>
+            {invoice?.invoice?.issuedAt
+              ? new Date(invoice.invoice.issuedAt).toLocaleDateString()
+              : "—"}
           </div>
         </div>
       </div>
 
       {/* LOGO + COMPANY INFO */}
-      <table style={{ position: "relative", zIndex: 2 }}>
+      <table>
         <tbody>
           <tr>
             <td>
-              <img src={logo} alt="Company Logo" style={{ height: 60 }} />
+              <img src={logo} alt="Logo" style={{ height: 60 }} />
             </td>
             <td style={{ textAlign: "right" }}>
-              <strong style={{ color: "rgb(22, 85, 135)" }}>
-                Epex Logistics
-              </strong>
+              <strong>Epex Logistics</strong>
               <br />
-              <span style={{ color: "rgb(22, 85, 135)" }}>
-                Global Shipping & Delivery
-              </span>
+              Global Shipping & Delivery
               <br />
-              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
-                No: 8, 34862 Kartal, Istanbul, Turkey
-              </span>
+              No: 8, 34862 Kartal, Istanbul, Turkey
               <br />
-              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
-                support@epexlogistics.com
-              </span>
+              support@epexlogistics.com
               <br />
-              <span style={{ fontSize: 13, color: "rgb(22, 85, 135)" }}>
-                https://epexlogistics.com
-              </span>
+              https://epexlogistics.com
             </td>
           </tr>
         </tbody>
       </table>
 
       {/* INVOICE META */}
-      <table style={{ position: "relative", zIndex: 2 }}>
+      <table>
         <tbody>
           <tr>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Invoice Number</th>
-            <td>{invoice.invoice.invoiceNumber}</td>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Date</th>
-            <td>{new Date(invoice.invoice.issuedAt).toLocaleDateString()}</td>
+            <th>Invoice Number</th>
+            <td>{invoice?.invoice?.invoiceNumber || "—"}</td>
+            <th>Date</th>
+            <td>
+              {invoice?.invoice?.issuedAt
+                ? new Date(invoice.invoice.issuedAt).toLocaleDateString()
+                : "—"}
+            </td>
           </tr>
         </tbody>
       </table>
 
-      {/* SENDER & RECEIVER */}
-<table style={{ position: "relative", zIndex: 2 }}>
-  <thead>
-    <tr>
-      <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
-        Sender
-      </th>
-      <th colSpan="2" style={{ color: "rgb(22, 85, 135)" }}>
-        Receiver
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>{invoice.sender.name}</td>
-      <td>Name</td>
-      <td>{invoice.receiver.name}</td>
-    </tr>
-
-    {/* ✅ EMAIL ROW ADDED */}
-    <tr>
-      <td>Email</td>
-      <td>{invoice.sender.email || "—"}</td>
-      <td>Email</td>
-      <td>{invoice.receiver.email || "—"}</td>
-    </tr>
-
-    <tr>
-      <td>Phone</td>
-      <td>{invoice.sender.phone}</td>
-      <td>Phone</td>
-      <td>{invoice.receiver.phone}</td>
-    </tr>
-
-    <tr>
-      <td>Address</td>
-      <td>{invoice.sender.address}</td>
-      <td>Address</td>
-      <td>{invoice.receiver.address}</td>
-    </tr>
-  </tbody>
-</table>
-
-
-      {/* SHIPMENT DETAILS */}
-      <table className="tracking-table" style={{ position: "relative", zIndex: 2 }}>
+      {/* SENDER / RECEIVER */}
+      <table>
         <thead>
           <tr>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Description</th>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Qty</th>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Weight</th>
-            <th style={{ color: "rgb(22, 85, 135)" }}>Amount</th>
+            <th colSpan="2">Sender</th>
+            <th colSpan="2">Receiver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>{invoice?.sender?.name || "—"}</td>
+            <td>Name</td>
+            <td>{invoice?.receiver?.name || "—"}</td>
+          </tr>
+
+          <tr>
+            <td>Email</td>
+            <td>{invoice?.sender?.email || "—"}</td>
+            <td>Email</td>
+            <td>{invoice?.receiver?.email || "—"}</td>
+          </tr>
+
+          <tr>
+            <td>Phone</td>
+            <td>{invoice?.sender?.phone || "—"}</td>
+            <td>Phone</td>
+            <td>{invoice?.receiver?.phone || "—"}</td>
+          </tr>
+
+          <tr>
+            <td>Address</td>
+            <td>{invoice?.sender?.address || "—"}</td>
+            <td>Address</td>
+            <td>{invoice?.receiver?.address || "—"}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* SHIPMENT */}
+      <table className="tracking-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Weight</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Courier Shipment</td>
-            <td>{invoice.shipment.quantity}</td>
-            <td>{invoice.shipment.weight} kg</td>
-            <td>
-              {invoice.payment.currency}
-              {invoice.payment.subtotal}
-            </td>
+            <td>{invoice?.shipment?.quantity || "—"}</td>
+            <td>{invoice?.shipment?.weight || "—"} kg</td>
+            <td>{invoice?.payment?.currency}{invoice?.payment?.subtotal}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colSpan="3">Subtotal</td>
-            <td>
-              {invoice.payment.currency}
-              {invoice.payment.subtotal}
-            </td>
+            <td>{invoice?.payment?.currency}{invoice?.payment?.subtotal}</td>
           </tr>
           <tr>
             <td colSpan="3">VAT</td>
-            <td>
-              {invoice.payment.currency}
-              {invoice.payment.tax}
-            </td>
+            <td>{invoice?.payment?.currency}{invoice?.payment?.tax}</td>
           </tr>
-          <tr className="totals">
-            <td colSpan="3">
-              <strong>TOTAL</strong>
-            </td>
-            <td>
-              <strong>
-                {invoice.payment.currency}
-                {invoice.payment.total}
-              </strong>
-            </td>
+          <tr>
+            <td colSpan="3"><strong>TOTAL</strong></td>
+            <td><strong>{invoice?.payment?.currency}{invoice?.payment?.total}</strong></td>
           </tr>
         </tfoot>
       </table>
 
-      {/* FOOTER DISCLAIMER */}
-      <div
-        style={{
-          marginTop: 50,
-          fontSize: 12,
-          color: "#475569",
-          lineHeight: 1.6,
-          textAlign: "center",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+      {/* DISCLAIMER */}
+      <div style={{ marginTop: 40, fontSize: 12, textAlign: "center" }}>
         <strong>Disclaimer:</strong>
         <br />
         This invoice serves as proof of payment for logistics services rendered by
-        Epex Logistics. All shipments are handled in accordance with our standard
-        terms and conditions. Epex Logistics shall not be held liable for delays
-        caused by customs inspections, force majeure, or circumstances beyond our
-        control.
+        Epex Logistics.
       </div>
+
     </div>
   </>
 )}
+
 
 
 
